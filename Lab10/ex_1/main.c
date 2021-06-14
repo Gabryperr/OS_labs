@@ -24,9 +24,9 @@ void *threadFunction(void *params) {
     i = *((int *) params);
 
     // perform critical operation
-    if (pthread_mutex_lock(&m) != SEM_OK) DEATH("failed to lock mutex")
+    if (pthread_mutex_lock(&m) != SEM_OK) DEATH("failed to lock mutex\n")
     sum += 1.0 / pow(2.0, i);
-    if (pthread_mutex_unlock(&m) != SEM_OK) DEATH("failed to unlock mutex")
+    if (pthread_mutex_unlock(&m) != SEM_OK) DEATH("failed to unlock mutex\n")
 
     pthread_exit(EXIT_SUCCESS);
 }
