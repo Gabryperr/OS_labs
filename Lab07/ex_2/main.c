@@ -114,6 +114,8 @@ int main() {
     // launch last prime threads
     params_array[thread_num - 1].start_pos = ((number_to_check / 2) / thread_num) * (thread_num - 1);
     params_array[thread_num - 1].end_pos = (number_to_check / 2) + 1;
+    if (pthread_create(&threads[thread_num - 1], NULL, threadPrimeFunction, (void *) &params_array[thread_num - 1]) != 0)
+        DEATH("pthread_create failed\n")
 
     // launch join thread
     join_params.threads = threads;
