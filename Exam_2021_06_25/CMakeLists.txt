@@ -4,3 +4,4 @@ project(Exam_2021_06_25 C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(Exam_2021_06_25 main.c)
+target_link_libraries(Exam_2021_06_25 pthread)
