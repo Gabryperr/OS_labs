@@ -81,7 +81,8 @@ int main() {
     int age, thread_num[3];
 
     // open file
-    fp = fopen(FILE_NAME, "r");
+    if ((fp = fopen(FILE_NAME, "r")) == NULL)
+        PDEATH("failed to open file\n")
 
     // init semaphore
     if (sem_init(&sem_main, THREAD_SHARED, 1) == FAIL)
@@ -91,16 +92,16 @@ int main() {
             PDEATH("failed to init semaphore thread")
     }
 
+    // init current_time and finish variable
+    current_time = START_TIME;
+    finish = FALSE;
+
     // create threads
     for (int i = 0; i < 3; i++) {
         thread_num[i] = i;
         if (pthread_create(&tid[i], NULL, threadFunction, (void *) &thread_num[i]) != SUCCESS)
             DEATH("failed to create thread\n")
     }
-
-    // init current_time and finish variable
-    current_time = START_TIME;
-    finish = FALSE;
 
     // scan the content of the file
     while (!feof(fp)) {
